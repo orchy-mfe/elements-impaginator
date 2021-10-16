@@ -1,24 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import './App.css';
-import {registerCustomElement, observableCatalogue} from "./custom-elements-catalogue";
+import React from 'react';
+
+import {SideMenu} from "./components/side-menu/SideMenu";
+import {CatalogueRegister} from "./components/catalogue-register/CatalogueRegister";
+import {PageContent} from "./components/page-content/PageContent";
+
+import Style from './App.module.css';
 
 function App() {
-
-    const [currentLink, setCurrentLink] = useState('')
-    const [currentCatalogue, setCurrentCatalogue] = useState<string[]>([])
-
-    useEffect(() => {
-        const subscription = observableCatalogue.subscribe(catalogue => setCurrentCatalogue([...catalogue]))
-        return () => subscription.unsubscribe()
-    }, [])
-
     return (
         <>
-            <input type='text' onChange={event => setCurrentLink(event.target.value)}/>
-            <button onClick={() => registerCustomElement(currentLink)}>{'Register custom element'}</button>
-            {
-                currentCatalogue
-            }
+            <SideMenu/>
+            <div className={Style.pageContent}>
+                <CatalogueRegister/>
+                <PageContent/>
+            </div>
         </>
     );
 }
