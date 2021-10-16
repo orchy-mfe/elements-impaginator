@@ -1,6 +1,7 @@
 import React from "react";
 import {useDrag} from "react-dnd";
 import {DragSourceMonitor} from "react-dnd/dist/types/types";
+import {Configuration} from "../../models/Configuration";
 
 type CatalogueItemProps = {
     itemName: string
@@ -12,16 +13,22 @@ const opacityManager = (monitor: DragSourceMonitor) => ({
 })
 
 export const CatalogueItem: React.FC<CatalogueItemProps> = ({itemName}) => {
-    const [{ opacity }, dragRef] = useDrag(
+
+    const configuration: Configuration = {
+        type: 'element',
+        tag: itemName
+    }
+
+    const [{opacity}, dragRef] = useDrag(
         () => ({
             type: 'element',
-            item: { tagName: itemName },
+            item: configuration,
             collect: opacityManager
         }),
         []
     )
     return (
-        <div ref={dragRef} style={{ opacity }}>
+        <div ref={dragRef} style={{opacity}}>
             {itemName}
         </div>
     )

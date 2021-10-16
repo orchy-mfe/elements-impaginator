@@ -1,18 +1,17 @@
-import React, {useRef} from "react";
+import React, {useState} from "react";
 import {useDrop} from "react-dnd";
 
-import Style from './PageContent.module.css'
-import {elementCreator} from "../../lib/elementCreator";
+import {Configuration} from "../../models/Configuration";
+import {DroppableItem} from "../droppable-item/DroppableItem";
 
-type DragObject = {
-    tagName: string
-}
+import Style from './PageContent.module.css'
 
 export const PageContent = () => {
 
-    const contentRef = useRef<HTMLDivElement>(null)
+    const [droppedContent, setDroppedContent] = useState<JSX.Element>()
+    const [, setConfiguration] = useState<Configuration>()
 
-    const [, drop] = useDrop<DragObject, unknown, unknown>(
+    const [{isOver}, drop] = useDrop<Configuration, unknown, { isOver: boolean }>(
         () => ({
             accept: 'element',
             collect: monitor => ({
@@ -20,16 +19,17 @@ export const PageContent = () => {
             }),
             drop: (item, monitor) => {
                 const droppedOnMe = !monitor.didDrop()
-                if (droppedOnMe) {
-                    contentRef.current?.appendChild(elementCreator(item.tagName))
+                if (!droppedContent && droppedOnMe) {
+                    setConfiguration(item)
+                    setDroppedContent(<DroppableItem configuration={item} />)
                 }
             }
         })
     )
 
     return (
-        <div ref={drop} className={Style.pageContent}>
-            <div ref={contentRef}/>
+        <div ref={drop} className={Style.pageContent} style={{background: isOver ? 'yellow' : 'white'}}>
+            {droppedContent}
         </div>
     )
 }
