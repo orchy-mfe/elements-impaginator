@@ -15,8 +15,14 @@ export const PageContent = () => {
     const [, drop] = useDrop<DragObject, unknown, unknown>(
         () => ({
             accept: 'element',
-            drop: (item, b) => {
-                contentRef.current?.appendChild(elementCreator(item.tagName))
+            collect: monitor => ({
+                isOver: monitor.isOver({shallow: true})
+            }),
+            drop: (item, monitor) => {
+                const droppedOnMe = !monitor.didDrop()
+                if (droppedOnMe) {
+                    contentRef.current?.appendChild(elementCreator(item.tagName))
+                }
             }
         })
     )
