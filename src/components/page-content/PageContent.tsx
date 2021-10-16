@@ -17,14 +17,15 @@ export const PageContent = () => {
             collect: monitor => ({
                 isOver: monitor.isOver({shallow: true})
             }),
+            canDrop: () => droppedContent === undefined,
             drop: (item, monitor) => {
                 const droppedOnMe = !monitor.didDrop()
-                if (!droppedContent && droppedOnMe) {
+                if (droppedOnMe) {
                     setConfiguration(item)
                     setDroppedContent(<DroppableItem configuration={item} />)
                 }
             }
-        })
+        }), [droppedContent]
     )
 
     return (

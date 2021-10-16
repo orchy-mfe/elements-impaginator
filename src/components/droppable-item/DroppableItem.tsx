@@ -2,6 +2,17 @@ import React, {useState} from "react";
 import {useDrop} from "react-dnd";
 
 import {Configuration} from "../../models/Configuration";
+import {styleConverter} from "../../lib/CssToJs";
+
+const createStyle = (configuration: Configuration, isOver: boolean) => {
+    const convertedStyle = styleConverter(configuration.attributes?.style)
+    return {
+        style: {
+            ...isOver ? {background: 'yellow'} : undefined,
+            ...convertedStyle
+        }
+    }
+}
 
 export const DroppableItem: React.FC<{ configuration: Configuration }> = ({configuration}) => {
 
@@ -17,7 +28,7 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
             drop: (item, monitor) => {
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {
-                    configuration.content = [...configuration.content || [], configuration]
+                    configuration.content = [...configuration.content || [], item]
                     setChildren(configuration.content?.map(configuration => <DroppableItem
                         configuration={configuration}/>))
                     setConfigurationState(configuration)
@@ -30,7 +41,8 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
         configurationState.tag || 'div',
         {
             ref: drop,
-            style: {height: '100px', background: isOver ? 'yellow' : 'white'}
+            ...configuration.attributes,
+            ...createStyle(configuration, isOver)
         },
         children
     )
