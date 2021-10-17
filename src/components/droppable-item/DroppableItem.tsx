@@ -6,9 +6,11 @@ import {styleConverter} from "../../lib/CssToJs";
 
 const createStyle = (configuration: Configuration, isOver: boolean) => {
     const convertedStyle = styleConverter(configuration.attributes?.style)
+    const isEmpty = configuration.content?.length || -1 <= 0
     return {
         style: {
-            ...isOver ? {background: 'yellow'} : undefined,
+            ...isEmpty ? {paddingBottom: '50px'} : undefined,
+            ...isOver && !configuration.tag ? {background: 'yellow'} : undefined,
             ...convertedStyle
         }
     }
@@ -25,6 +27,7 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
             collect: monitor => ({
                 isOver: monitor.isOver({shallow: true})
             }),
+            canDrop: () => !configuration.tag,
             drop: (item, monitor) => {
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {

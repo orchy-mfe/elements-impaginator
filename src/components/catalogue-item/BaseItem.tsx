@@ -3,8 +3,8 @@ import {useDrag} from "react-dnd";
 import {DragSourceMonitor} from "react-dnd/dist/types/types";
 import {Configuration} from "../../models/Configuration";
 
-const rowStyle = 'display: flex; flex-direction: column; min-height: 50px; min-width: 50px'
-const columnStyle = 'display: flex; flex-direction: row; min-height: 50px; min-width: 50px'
+const rowStyle = 'display: flex; flex-direction: column;'
+const columnStyle = 'display: flex; flex-direction: row;'
 
 type BaseItemProps = {
     kind: 'row' | 'column'
