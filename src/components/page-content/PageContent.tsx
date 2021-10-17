@@ -28,8 +28,10 @@ export const PageContent = () => {
         }), [droppedContent]
     )
 
+    const background = {background: !droppedContent && isOver ? 'yellow' : 'white'}
+
     return (
-        <div ref={drop} className={Style.pageContent} style={{background: isOver ? 'yellow' : 'white'}}>
+        <div ref={drop} className={Style.pageContent} style={background}>
             {droppedContent}
         </div>
     )
