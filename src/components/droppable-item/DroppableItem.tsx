@@ -4,17 +4,24 @@ import {useDrop} from "react-dnd";
 import {Configuration} from "../../models/Configuration";
 import {styleConverter} from "../../lib/CssToJs";
 
+const shouldInsertPaddingBottom = (configuration: Configuration) => {
+    const showForRow = configuration.type === "row"
+    const showForColumn = configuration.type === "column" && (configuration.content?.length || -1) <= 0
+    return showForRow || showForColumn
+}
+
 const createStyle = (configuration: Configuration, isOver: boolean) => {
     const convertedStyle = styleConverter(configuration.attributes?.style)
-    const isEmpty = configuration.content?.length || -1 <= 0
     return {
         style: {
-            ...isEmpty ? {paddingBottom: '50px'} : undefined,
+            ...shouldInsertPaddingBottom(configuration) ? {paddingBottom: '50px'} : undefined,
             ...isOver && !configuration.tag ? {background: 'yellow'} : undefined,
             ...convertedStyle
         }
     }
 }
+
+const droppableItemMapper = (configuration: Configuration) => <DroppableItem configuration={configuration}/>
 
 export const DroppableItem: React.FC<{ configuration: Configuration }> = ({configuration}) => {
 
@@ -32,8 +39,7 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {
                     configuration.content = [...configuration.content || [], item]
-                    setChildren(configuration.content?.map(configuration => <DroppableItem
-                        configuration={configuration}/>))
+                    setChildren(configuration.content?.map(droppableItemMapper))
                     setConfigurationState(configuration)
                 }
             }
