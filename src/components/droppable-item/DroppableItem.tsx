@@ -14,6 +14,7 @@ const createStyle = (configuration: Configuration, isOver: boolean) => {
     const convertedStyle = styleConverter(configuration.attributes?.style)
     return {
         style: {
+            ...configuration.tag ? undefined : {border: '1px dotted'},
             ...shouldInsertPaddingBottom(configuration) ? {paddingBottom: '50px'} : undefined,
             ...isOver && !configuration.tag ? {background: 'yellow'} : undefined,
             ...convertedStyle
