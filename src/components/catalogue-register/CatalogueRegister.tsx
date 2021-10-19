@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {registerCustomElement} from "../../custom-elements-catalogue";
+import {registerCustomElement} from "../../stores/custom-elements-catalogue";
 
 export const CatalogueRegister = () => {
 
