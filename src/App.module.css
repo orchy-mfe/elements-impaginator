@@ -1,4 +1,5 @@
 .pageContent {
-    margin-left: 250px;
     height: 100%;
+    width: 85%;
+    float: right;
 }

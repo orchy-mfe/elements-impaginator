@@ -8,6 +8,8 @@ import {InputText} from "primereact/inputtext";
 
 import Style from './CatalogueRegister.module.css'
 
+const plusIcon = `p-sidebar-close-icon pi pi-plus ${Style.showCatalogue}`
+
 export const CatalogueRegister: React.FC = () => {
 
     const [dialogVisible, setDialogVisible] = useState(false)
@@ -23,9 +25,7 @@ export const CatalogueRegister: React.FC = () => {
 
     return (
         <>
-            <Button onClick={showDialog}>
-                <FormattedMessage id='catalogueRegistration'/>
-            </Button>
+            <span className={plusIcon} onClick={showDialog}/>
             <Dialog footer={<CatalogueRegisterFooter registerCatalogue={registerCatalogue}/>}
                     header={<FormattedMessage id='catalogueRegistration'/>}
                     visible={dialogVisible}
