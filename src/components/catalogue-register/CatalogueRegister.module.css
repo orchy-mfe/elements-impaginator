@@ -1,0 +1,8 @@
+.dialogContainer {
+    width: 50vw;
+}
+
+.dialogContent {
+    display: flex;
+    flex-direction: column;
+}
