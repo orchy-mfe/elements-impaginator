@@ -32,8 +32,7 @@ const droppableItemMapper = (configuration: Configuration) => <DroppableItem con
 
 export const DroppableItem: React.FC<{ configuration: Configuration }> = ({configuration}) => {
 
-    const [configurationState, setConfigurationState] = useState(configuration)
-    const [children, setChildren] = useState<JSX.Element[]>([])
+    const [, setConfigurationState] = useState(configuration)
 
     const contextMenuRef = useRef(null)
 
@@ -53,7 +52,6 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {
                     configuration.content = [...configuration.content || [], item]
-                    setChildren(configuration.content?.map(droppableItemMapper))
                     setConfigurationState(configuration)
                 }
             }
@@ -61,13 +59,15 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
     )
 
     return React.createElement(
-        configurationState.tag || 'div',
+        configuration.tag || 'div',
         {
             ref: drop,
             onContextMenu: openContextMenu,
             ...configuration.attributes,
             ...createStyle(configuration, isOver)
         },
-        [<ContextMenu model={menuItems} ref={contextMenuRef}/>].concat(children)
+        [<ContextMenu model={menuItems} ref={contextMenuRef}/>].concat(
+            (configuration.content || []).map(droppableItemMapper)
+        )
     )
 }

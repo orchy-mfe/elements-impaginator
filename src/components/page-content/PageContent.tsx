@@ -36,8 +36,7 @@ export const PageContent = () => {
             drop: (item, monitor) => {
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {
-                    setConfiguration(item)
-                    setDroppedContent(<DroppableItem configuration={item}/>)
+                    updateConfiguration(item)
                 }
             }
         }), [droppedContent]
