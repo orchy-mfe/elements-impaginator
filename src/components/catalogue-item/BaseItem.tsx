@@ -21,6 +21,11 @@ const createConfiguration = (kind: "row" | "column") => ({
     }
 })
 
+export const baseStyle = {
+    row: rowStyle,
+    column: columnStyle
+}
+
 export const BaseItem: React.FC<BaseItemProps> = ({kind}) => {
 
     const [configuration, setConfiguration] = useState(createConfiguration(kind))

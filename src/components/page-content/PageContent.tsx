@@ -1,15 +1,30 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useDrop} from "react-dnd";
 
 import {Configuration} from "../../models/Configuration";
 import {DroppableItem} from "../droppable-item/DroppableItem";
 
 import Style from './PageContent.module.css'
+import {observableConfiguration} from "../../stores/configuration";
 
 export const PageContent = () => {
 
     const [droppedContent, setDroppedContent] = useState<JSX.Element>()
-    const [, setConfiguration] = useState<Configuration>()
+    const [configuration, setConfiguration] = useState<Configuration>()
+
+    const updateConfiguration = useCallback((configuration?: Configuration) => {
+        if(configuration) {
+            setConfiguration(configuration)
+            setDroppedContent(<DroppableItem configuration={configuration}/>)
+        }
+    }, [])
+
+    useEffect(() => observableConfiguration.next(configuration), [configuration])
+
+    useEffect(() => {
+        const subscription = observableConfiguration.subscribe(updateConfiguration)
+        return () => subscription.unsubscribe()
+    }, [])
 
     const [{isOver}, drop] = useDrop<Configuration, unknown, { isOver: boolean }>(
         () => ({

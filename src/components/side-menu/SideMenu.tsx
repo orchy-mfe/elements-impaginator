@@ -5,10 +5,12 @@ import {CatalogueItem} from "../catalogue-item/CatalogueItem";
 import {BaseItem} from "../catalogue-item/BaseItem";
 import {observableCatalogue} from "../../stores/custom-elements-catalogue";
 import {CatalogueRegister} from "../catalogue-register/CatalogueRegister";
+import {ConfigurationManager} from "../configuration-manager/ConfigurationManager";
 
 import Style from './SideMenu.module.css'
 
-const noOp = () => {}
+const noOp = () => {
+}
 
 export const SideMenu = () => {
     const [currentCatalogue, setCurrentCatalogue] = useState<string[]>([])
@@ -19,7 +21,7 @@ export const SideMenu = () => {
     }, [])
 
     return (
-        <Sidebar visible onHide={noOp} icons={() => <CatalogueRegister/>} showCloseIcon={false} className={Style.sideBar}>
+        <Sidebar visible onHide={noOp} icons={generateIcons} showCloseIcon={false} className={Style.sideBar}>
             <b>{'Items catalogue'}</b>
             <BaseItem kind={"row"}/>
             <BaseItem kind={"column"}/>
@@ -29,3 +31,8 @@ export const SideMenu = () => {
         </Sidebar>
     )
 }
+
+const generateIcons = () => <>
+    <ConfigurationManager/>
+    <CatalogueRegister/>
+</>
