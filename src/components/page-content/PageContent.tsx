@@ -22,7 +22,7 @@ export const PageContent = () => {
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {
                     setConfiguration(item)
-                    setDroppedContent(<DroppableItem configuration={item} />)
+                    setDroppedContent(<DroppableItem configuration={item}/>)
                 }
             }
         }), [droppedContent]

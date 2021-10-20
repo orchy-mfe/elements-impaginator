@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {MouseEvent, useCallback, useRef, useState} from "react";
 import {useDrop} from "react-dnd";
 
 import {Configuration} from "../../models/Configuration";
 import {styleConverter} from "../../lib/CssToJs";
+import {menuItems} from "../../models/ItemContextMenu";
+import {ContextMenu} from "primereact/contextmenu";
 
 const shouldInsertPaddingBottom = (configuration: Configuration) => {
     const showForRow = configuration.type === "row"
@@ -27,7 +29,14 @@ const droppableItemMapper = (configuration: Configuration) => <DroppableItem con
 export const DroppableItem: React.FC<{ configuration: Configuration }> = ({configuration}) => {
 
     const [configurationState, setConfigurationState] = useState(configuration)
-    const [children, setChildren] = useState<JSX.Element[]>()
+    const [children, setChildren] = useState<JSX.Element[]>([])
+
+    const contextMenuRef = useRef(null)
+
+    const openContextMenu = useCallback((event: MouseEvent<HTMLDivElement>) => {
+        // @ts-ignore
+        contextMenuRef.current?.show(event)
+    }, [])
 
     const [{isOver}, drop] = useDrop<Configuration, unknown, { isOver: boolean }>(
         () => ({
@@ -51,9 +60,10 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
         configurationState.tag || 'div',
         {
             ref: drop,
+            onContextMenu: openContextMenu,
             ...configuration.attributes,
             ...createStyle(configuration, isOver)
         },
-        children
+        [<ContextMenu model={menuItems} ref={contextMenuRef}/>].concat(children)
     )
 }
