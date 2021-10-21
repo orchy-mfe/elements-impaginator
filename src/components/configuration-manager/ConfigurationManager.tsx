@@ -6,7 +6,6 @@ import Editor from "@monaco-editor/react";
 import Style from "../catalogue-register/CatalogueRegister.module.css";
 import {Button} from "primereact/button";
 import {observableConfiguration} from "../../stores/configuration";
-import {Configuration} from "../../models/Configuration";
 
 const sideBarIcon = `p-sidebar-close-icon pi pi-sliders-v ${Style.showCatalogue}`
 
@@ -17,8 +16,6 @@ export const ConfigurationManager = () => {
     const showDialog = useCallback(() => setDialogVisible(true), [])
 
     const [currentConfiguration, setCurrentConfiguration] = useState<any>()
-
-    const setConfiguration = useCallback(event => setCurrentConfiguration(event.target.value), [])
 
     useEffect(() => {
         const subscription = observableConfiguration.subscribe((configuration) => setCurrentConfiguration(JSON.stringify(configuration, null, 2)))
@@ -35,7 +32,8 @@ export const ConfigurationManager = () => {
                     className={Style.dialogContainer}
             >
                 <div className={Style.dialogContent}>
-                    <Editor height='70vh' language='json' value={currentConfiguration} onChange={setConfiguration}/>
+                    <Editor height='70vh' language='json' value={currentConfiguration}
+                            onChange={setCurrentConfiguration}/>
                 </div>
             </Dialog>
         </>
@@ -43,12 +41,11 @@ export const ConfigurationManager = () => {
 }
 
 const parseConfiguration = (toParse: string) => {
-    let configuration: Configuration = {type: 'row'}
     try {
-        configuration = JSON.parse(toParse)
+        return JSON.parse(toParse)
     } catch (error) {
+        return undefined
     }
-    return configuration
 }
 
 type ConfigurationManagerFooterProps = {
@@ -58,7 +55,7 @@ type ConfigurationManagerFooterProps = {
 const ConfigurationManagerFooter: React.FC<ConfigurationManagerFooterProps> = ({configuration}) => {
     const parsedConfiguration = parseConfiguration(configuration)
     return (
-        <Button onClick={() => observableConfiguration.next(parsedConfiguration)}>
+        <Button disabled={!parsedConfiguration} onClick={() => observableConfiguration.next(parsedConfiguration)}>
             <FormattedMessage id='configuration.update'/>
         </Button>
     )
