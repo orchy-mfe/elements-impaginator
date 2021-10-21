@@ -75,6 +75,14 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
         }
     }, [drop, configuration.properties])
 
+    const deleteChild = useCallback((itemNumber: number) => () => {
+        configuration.content?.splice(itemNumber, 1)
+        setConfigurationState({...configuration})
+    }, [configuration])
+
+    const droppableChildren = (configuration.content || [])
+        .map((configuration, key) => <DroppableItem configuration={configuration} deleteItem={deleteChild(key)}/>)
+
     return React.createElement(
         configuration.tag || 'div',
         {
@@ -83,8 +91,6 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
             ...configuration.attributes,
             ...createStyle(configuration, isOver)
         },
-        [<ContextMenu model={buildMenuItems({deleteItem})} ref={contextMenuRef}/>].concat(
-            (configuration.content || []).map(configuration => <DroppableItem configuration={configuration} deleteItem={deleteItem}/>)
-        )
+        [<ContextMenu model={buildMenuItems({deleteItem})} ref={contextMenuRef}/>].concat(droppableChildren)
     )
 }
