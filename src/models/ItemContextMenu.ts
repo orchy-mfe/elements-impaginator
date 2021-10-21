@@ -11,8 +11,3 @@ export const buildMenuItems: BuildMenuItemType = ({deleteItem}: BuildMenuItemsPa
     icon: 'pi pi-minus-circle',
     command: deleteItem,
 }]
-
-export const menuItems: MenuItem[] = [{
-    label: 'Delete',
-    icon: 'pi pi-minus-circle'
-}]

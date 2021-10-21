@@ -21,7 +21,7 @@ export const PageContent = () => {
     useEffect(() => {
         const subscription = observableConfiguration.subscribe(updateConfiguration)
         return () => subscription.unsubscribe()
-    }, [])
+    }, [updateConfiguration])
 
     const [{isOver}, drop] = useDrop<Configuration, unknown, { isOver: boolean }>(
         () => ({

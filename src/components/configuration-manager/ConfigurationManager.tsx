@@ -1,9 +1,9 @@
-import React, {useCallback, useState, useEffect} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Dialog} from "primereact/dialog";
 import {FormattedMessage} from "react-intl";
+import Editor from "@monaco-editor/react";
 
 import Style from "../catalogue-register/CatalogueRegister.module.css";
-import {InputTextarea} from "primereact/inputtextarea";
 import {Button} from "primereact/button";
 import {observableConfiguration} from "../../stores/configuration";
 import {Configuration} from "../../models/Configuration";
@@ -21,7 +21,7 @@ export const ConfigurationManager = () => {
     const setConfiguration = useCallback(event => setCurrentConfiguration(event.target.value), [])
 
     useEffect(() => {
-        const subscription = observableConfiguration.subscribe((configuration) => setCurrentConfiguration(JSON.stringify(configuration)))
+        const subscription = observableConfiguration.subscribe((configuration) => setCurrentConfiguration(JSON.stringify(configuration, null, 2)))
         return () => subscription.unsubscribe()
     }, [])
 
@@ -35,7 +35,7 @@ export const ConfigurationManager = () => {
                     className={Style.dialogContainer}
             >
                 <div className={Style.dialogContent}>
-                    <InputTextarea value={currentConfiguration} onChange={setConfiguration}/>
+                    <Editor height='70vh' language='json' value={currentConfiguration} onChange={setConfiguration}/>
                 </div>
             </Dialog>
         </>
@@ -46,7 +46,8 @@ const parseConfiguration = (toParse: string) => {
     let configuration: Configuration = {type: 'row'}
     try {
         configuration = JSON.parse(toParse)
-    } catch (error) {}
+    } catch (error) {
+    }
     return configuration
 }
 

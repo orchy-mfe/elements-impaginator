@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import {Configuration} from "../../models/Configuration";
 import {styleConverter} from "../../lib/CssToJs";
-import {buildMenuItems, menuItems} from "../../models/ItemContextMenu";
+import {buildMenuItems} from "../../models/ItemContextMenu";
 import {ContextMenu} from "primereact/contextmenu";
 import {baseStyle} from "../catalogue-item/BaseItem";
 
