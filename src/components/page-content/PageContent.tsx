@@ -13,9 +13,7 @@ export const PageContent = () => {
     const [configuration, setConfiguration] = useState<Configuration>()
 
     const updateConfiguration = useCallback((configuration?: Configuration) => {
-        if (configuration) {
-            setConfiguration(configuration)
-        }
+        setConfiguration(configuration)
     }, [])
 
     useEffect(() => observableConfiguration.next(configuration), [configuration])
@@ -54,11 +52,15 @@ export const PageContent = () => {
         }
     }, [drop, configuration?.properties])
 
+    const deleteItem = useCallback(() => {
+        setConfiguration(undefined)
+    }, [])
+
     const background = {background: !configuration && isOver ? 'yellow' : 'white'}
 
     return (
         <div ref={onRefChange} className={Style.pageContent} style={background}>
-            {configuration && <DroppableItem configuration={configuration}/>}
+            {configuration && <DroppableItem configuration={configuration} deleteItem={deleteItem}/>}
         </div>
     )
 }

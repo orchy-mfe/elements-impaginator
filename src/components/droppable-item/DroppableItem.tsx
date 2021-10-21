@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import {Configuration} from "../../models/Configuration";
 import {styleConverter} from "../../lib/CssToJs";
-import {menuItems} from "../../models/ItemContextMenu";
+import {buildMenuItems, menuItems} from "../../models/ItemContextMenu";
 import {ContextMenu} from "primereact/contextmenu";
 import {baseStyle} from "../catalogue-item/BaseItem";
 
@@ -29,13 +29,12 @@ const createStyle = (configuration: Configuration, isOver: boolean) => {
     }
 }
 
-const droppableItemMapper = (configuration: Configuration) => <DroppableItem configuration={configuration}/>
-
 type DroppableItemProps = {
-    configuration: Configuration
+    configuration: Configuration,
+    deleteItem: () => void
 }
 
-export const DroppableItem: React.FC<DroppableItemProps> = ({configuration}) => {
+export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, deleteItem}) => {
 
     const [, setConfigurationState] = useState(configuration)
 
@@ -84,8 +83,8 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration}) => 
             ...configuration.attributes,
             ...createStyle(configuration, isOver)
         },
-        [<ContextMenu model={menuItems} ref={contextMenuRef}/>].concat(
-            (configuration.content || []).map(droppableItemMapper)
+        [<ContextMenu model={buildMenuItems({deleteItem})} ref={contextMenuRef}/>].concat(
+            (configuration.content || []).map(configuration => <DroppableItem configuration={configuration} deleteItem={deleteItem}/>)
         )
     )
 }
