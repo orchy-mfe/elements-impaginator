@@ -1,5 +1,6 @@
-import React, {MouseEvent, useCallback, useRef, useState} from "react";
+import React, {MouseEvent, RefObject, useCallback, useRef, useState} from "react";
 import {useDrop} from "react-dnd";
+import ReactDOM from "react-dom";
 
 import {Configuration} from "../../models/Configuration";
 import {styleConverter} from "../../lib/CssToJs";
@@ -58,10 +59,23 @@ export const DroppableItem: React.FC<{ configuration: Configuration }> = ({confi
         })
     )
 
+    const onRefChange = useCallback((ref: RefObject<any>) => {
+        if(ref) {
+            drop(ref)
+            const domNode = ReactDOM.findDOMNode(ref.current) || ref
+            if(domNode) {
+                for (const property in configuration.properties) {
+                    // @ts-ignore
+                    domNode[property] = configuration.properties[property]
+                }
+            }
+        }
+    }, [drop, configuration.properties])
+
     return React.createElement(
         configuration.tag || 'div',
         {
-            ref: drop,
+            ref: onRefChange,
             onContextMenu: openContextMenu,
             ...configuration.attributes,
             ...createStyle(configuration, isOver)

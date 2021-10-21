@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {useDrop} from "react-dnd";
+import ReactDOM from "react-dom";
 
 import {Configuration} from "../../models/Configuration";
 import {DroppableItem} from "../droppable-item/DroppableItem";
@@ -13,7 +14,7 @@ export const PageContent = () => {
     const [configuration, setConfiguration] = useState<Configuration>()
 
     const updateConfiguration = useCallback((configuration?: Configuration) => {
-        if(configuration) {
+        if (configuration) {
             setConfiguration(configuration)
             setDroppedContent(<DroppableItem configuration={configuration}/>)
         }
@@ -42,10 +43,23 @@ export const PageContent = () => {
         }), [droppedContent]
     )
 
+    const onRefChange = useCallback((ref: any) => {
+        if (ref) {
+            drop(ref)
+            const domNode = ReactDOM.findDOMNode(ref.current) || ref
+            if (domNode) {
+                for (const property in configuration?.properties) {
+                    // @ts-ignore
+                    domNode[property] = configuration.properties[property]
+                }
+            }
+        }
+    }, [drop, configuration?.properties])
+
     const background = {background: !droppedContent && isOver ? 'yellow' : 'white'}
 
     return (
-        <div ref={drop} className={Style.pageContent} style={background}>
+        <div ref={onRefChange} className={Style.pageContent} style={background}>
             {droppedContent}
         </div>
     )
