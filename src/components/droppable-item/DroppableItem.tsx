@@ -31,7 +31,11 @@ const createStyle = (configuration: Configuration, isOver: boolean) => {
 
 const droppableItemMapper = (configuration: Configuration) => <DroppableItem configuration={configuration}/>
 
-export const DroppableItem: React.FC<{ configuration: Configuration }> = ({configuration}) => {
+type DroppableItemProps = {
+    configuration: Configuration
+}
+
+export const DroppableItem: React.FC<DroppableItemProps> = ({configuration}) => {
 
     const [, setConfigurationState] = useState(configuration)
 
