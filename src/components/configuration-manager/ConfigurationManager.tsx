@@ -21,7 +21,7 @@ export const ConfigurationManager = () => {
     const setConfiguration = useCallback(event => setCurrentConfiguration(event.target.value), [])
 
     useEffect(() => {
-        const subscription = observableConfiguration.subscribe((configuration) => setCurrentConfiguration(configuration))
+        const subscription = observableConfiguration.subscribe((configuration) => setCurrentConfiguration(JSON.stringify(configuration)))
         return () => subscription.unsubscribe()
     }, [])
 
