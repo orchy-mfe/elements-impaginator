@@ -22,7 +22,7 @@ const createStyle = (configuration: Configuration, isOver: boolean) => {
         style: {
             ...initialStyle,
             ...configuration.tag ? undefined : {border: '1px dotted'},
-            ...shouldInsertPaddingBottom(configuration) ? {paddingBottom: '50px'} : undefined,
+            ...shouldInsertPaddingBottom(configuration) ? {paddingBottom: '20px'} : undefined,
             ...isOver && !configuration.tag ? {background: 'yellow'} : undefined,
             ...convertedStyle
         }
