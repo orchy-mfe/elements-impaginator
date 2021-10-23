@@ -1,12 +1,13 @@
 import React, {MouseEvent, RefObject, useCallback, useRef, useState} from "react";
 import {useDrop} from "react-dnd";
 import ReactDOM from "react-dom";
+import {ContextMenu} from "primereact/contextmenu";
 
 import {Configuration} from "../../models/Configuration";
 import {styleConverter} from "../../lib/CssToJs";
 import {buildMenuItems} from "../../models/ItemContextMenu";
-import {ContextMenu} from "primereact/contextmenu";
 import {baseStyle} from "../catalogue-item/BaseItem";
+import {ModalEditor} from "../modal-editor/ModalEditor";
 
 const shouldInsertPaddingBottom = (configuration: Configuration) => {
     const showForRow = configuration.type === "row"
@@ -37,6 +38,7 @@ type DroppableItemProps = {
 export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, deleteItem}) => {
 
     const [, setConfigurationState] = useState(configuration)
+    const [dialogVisible, setDialogVisible] = useState(false)
 
     const contextMenuRef = useRef(null)
 
@@ -80,6 +82,14 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
         setConfigurationState({...configuration})
     }, [configuration])
 
+    const hideDialog = useCallback(() => setDialogVisible(false), [])
+    const showDialog = useCallback(() => setDialogVisible(true), [])
+    const updateConfig = useCallback((newConfiguration: Configuration) => {
+        Object.assign(configuration, newConfiguration)
+        setConfigurationState({...configuration})
+        hideDialog()
+    }, [configuration, hideDialog])
+
     const droppableChildren = (configuration.content || [])
         .map((configuration, key) => <DroppableItem configuration={configuration} deleteItem={deleteChild(key)}/>)
 
@@ -91,6 +101,16 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
             ...configuration.attributes,
             ...createStyle(configuration, isOver)
         },
-        [<ContextMenu model={buildMenuItems({deleteItem})} ref={contextMenuRef}/>].concat(droppableChildren)
+        [
+            <ContextMenu model={buildMenuItems({deleteItem, showDialog})} ref={contextMenuRef}/>,
+            <ModalEditor
+                configuration={JSON.stringify({...configuration, content: undefined}, null, 2)}
+                isVisible={dialogVisible}
+                onHide={hideDialog}
+                onSave={updateConfig}
+                header={`${configuration.tag || configuration.type}`}
+                footerButton='configuration.update'
+            />
+        ].concat(droppableChildren)
     )
 }

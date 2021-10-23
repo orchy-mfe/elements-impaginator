@@ -21,7 +21,10 @@ export const ConfigurationManager = () => {
         return () => subscription.unsubscribe()
     }, [])
 
-    const onSave = (configuration: Configuration) => observableConfiguration.next(configuration)
+    const onSave = (configuration: Configuration) => {
+        observableConfiguration.next(configuration)
+        hideDialog()
+    }
 
     return (
         <>
