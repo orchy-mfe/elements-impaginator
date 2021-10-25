@@ -6,22 +6,23 @@ import {FormattedMessage} from "react-intl";
 import {Button} from "primereact/button";
 import {InputText} from "primereact/inputtext";
 
+import { useModal } from "../../hooks/useModal";
+
 import Style from './CatalogueRegister.module.css'
 
 const plusIcon = `p-sidebar-close-icon pi pi-plus ${Style.showCatalogue}`
 
 export const CatalogueRegister: React.FC = () => {
 
-    const [dialogVisible, setDialogVisible] = useState(false)
     const [currentLink, setCurrentLink] = useState('')
 
-    const hideDialog = useCallback(() => setDialogVisible(false), [])
-    const showDialog = useCallback(() => setDialogVisible(true), [])
+    const {showDialog, hideDialog, dialogVisible} = useModal()
+    
     const setCatalogueLink = useCallback(event => setCurrentLink(event.target.value), [])
     const registerCatalogue = useCallback(() => {
         registerCustomElement(currentLink)
-        setDialogVisible(false)
-    }, [currentLink])
+        hideDialog()
+    }, [currentLink, hideDialog])
 
     return (
         <>

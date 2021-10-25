@@ -8,6 +8,7 @@ import {styleConverter} from "../../lib/CssToJs";
 import {buildMenuItems} from "../../models/ItemContextMenu";
 import {baseStyle} from "../catalogue-item/BaseItem";
 import {ModalEditor} from "../modal-editor/ModalEditor";
+import { useModal } from "../../hooks/useModal";
 
 const shouldInsertPaddingBottom = (configuration: Configuration) => {
     const showForRow = configuration.type === "row"
@@ -38,7 +39,6 @@ type DroppableItemProps = {
 export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, deleteItem}) => {
 
     const [, setConfigurationState] = useState(configuration)
-    const [dialogVisible, setDialogVisible] = useState(false)
 
     const contextMenuRef = useRef(null)
 
@@ -82,8 +82,8 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
         setConfigurationState({...configuration})
     }, [configuration])
 
-    const hideDialog = useCallback(() => setDialogVisible(false), [])
-    const showDialog = useCallback(() => setDialogVisible(true), [])
+    const {showDialog, hideDialog, dialogVisible} = useModal()
+    
     const updateConfig = useCallback((newConfiguration: Configuration) => {
         Object.assign(configuration, newConfiguration)
         setConfigurationState({...configuration})

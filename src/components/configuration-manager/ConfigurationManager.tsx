@@ -1,8 +1,9 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {observableConfiguration} from "../../stores/configuration";
 import {ModalEditor} from "../modal-editor/ModalEditor";
 import {Configuration} from "../../models/Configuration";
+import { useModal } from "../../hooks/useModal";
 
 import Style from "../catalogue-register/CatalogueRegister.module.css";
 
@@ -10,9 +11,7 @@ const sideBarIcon = `p-sidebar-close-icon pi pi-sliders-v ${Style.showCatalogue}
 
 export const ConfigurationManager = () => {
 
-    const [dialogVisible, setDialogVisible] = useState(false)
-    const hideDialog = useCallback(() => setDialogVisible(false), [])
-    const showDialog = useCallback(() => setDialogVisible(true), [])
+    const {showDialog, hideDialog, dialogVisible} = useModal()
 
     const [currentConfiguration, setCurrentConfiguration] = useState<any>()
 
