@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useDrag} from "react-dnd";
-import {DragSourceMonitor} from "react-dnd/dist/types/types";
+import {DragSourceMonitor, useDrag} from "react-dnd";
 
 const rowStyle = 'display: flex; flex-direction: column;'
 const columnStyle = 'display: flex; flex-direction: row;'

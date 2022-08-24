@@ -7,7 +7,7 @@ import {observableCatalogue} from "../../stores/custom-elements-catalogue";
 import {CatalogueRegister} from "../catalogue-register/CatalogueRegister";
 import {ConfigurationManager} from "../configuration-manager/ConfigurationManager";
 
-import Style from './SideMenu.module.css'
+import './SideMenu.css'
 
 const noOp = () => {
 }
@@ -21,7 +21,7 @@ export const SideMenu = () => {
     }, [])
 
     return (
-        <Sidebar visible onHide={noOp} icons={generateIcons} showCloseIcon={false} className={Style.sideBar}>
+        <Sidebar visible onHide={noOp} icons={generateIcons} showCloseIcon={false}>
             <b>{'Items catalogue'}</b>
             <BaseItem kind={"row"}/>
             <BaseItem kind={"column"}/>

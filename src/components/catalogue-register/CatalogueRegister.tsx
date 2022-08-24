@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {ChangeEvent, useCallback, useState} from "react";
 
 import {Dialog} from "primereact/dialog";
 import {registerCustomElement} from "../../stores/custom-elements-catalogue";
@@ -18,7 +18,7 @@ export const CatalogueRegister: React.FC = () => {
 
     const {showDialog, hideDialog, dialogVisible} = useModal()
     
-    const setCatalogueLink = useCallback(event => setCurrentLink(event.target.value), [])
+    const setCatalogueLink = useCallback((event: ChangeEvent<HTMLInputElement>) => setCurrentLink(event.target.value), [])
     const registerCatalogue = useCallback(() => {
         registerCustomElement(currentLink)
         hideDialog()

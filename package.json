@@ -3,27 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@monaco-editor/react": "^4.3.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@monaco-editor/react": "^4.4.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.3",
     "lodash.camelcase": "^4.3.0",
-    "primeicons": "^4.1.0",
-    "primereact": "^6.6.0",
-    "react": "^17.0.2",
-    "react-dnd": "^14.0.4",
-    "react-dnd-html5-backend": "^14.0.2",
-    "react-dom": "^17.0.2",
-    "react-intl": "^5.20.13",
-    "react-scripts": "4.0.3",
-    "react-transition-group": "^4.4.2",
-    "rxjs": "^7.4.0",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "primeicons": "^5.0.0",
+    "primereact": "^8.4.0",
+    "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
+    "react-intl": "^6.0.8",
+    "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
+    "rxjs": "^7.5.6",
+    "typescript": "^4.7.4",
+    "web-vitals": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,6 +46,10 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash.camelcase": "^4.3.6"
+    "@types/lodash.camelcase": "^4.3.7",
+    "@types/jest": "^28.1.8",
+    "@types/node": "^18.7.13",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6"
   }
 }

@@ -1,6 +1,5 @@
 import React from "react";
-import {useDrag} from "react-dnd";
-import {DragSourceMonitor} from "react-dnd/dist/types/types";
+import {DragSourceMonitor, useDrag} from "react-dnd";
 import {Configuration} from "../../models/Configuration";
 
 type CatalogueItemProps = {

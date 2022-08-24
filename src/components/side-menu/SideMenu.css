@@ -1,0 +1,8 @@
+.p-sidebar-mask {
+    width: 15%;
+    border-right: 1px solid;
+}
+
+.p-sidebar {
+    box-shadow: none;
+}
