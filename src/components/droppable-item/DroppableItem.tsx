@@ -1,4 +1,5 @@
-import React, {MouseEvent, RefObject, useCallback, useRef, useState} from 'react'
+import { MouseEvent, RefObject, useCallback, useRef, useState } from 'react';
+import * as React from 'react';
 import {useDrop} from 'react-dnd'
 import ReactDOM from 'react-dom'
 import {ContextMenu} from 'primereact/contextmenu'
@@ -23,12 +24,12 @@ const createStyle = (configuration: Configuration, isOver: boolean) => {
     return {
         style: {
             ...initialStyle,
-            ...configuration.tag ? undefined : {border: '1px dotted'},
-            ...shouldInsertPaddingBottom(configuration) ? {paddingBottom: '20px'} : undefined,
-            ...isOver && !configuration.tag ? {background: 'yellow'} : undefined,
+            ...(configuration.tag ? undefined : {border: '1px dotted'}),
+            ...(shouldInsertPaddingBottom(configuration) ? {paddingBottom: '20px'} : undefined),
+            ...(isOver && !configuration.tag ? {background: 'yellow'} : undefined),
             ...convertedStyle
         }
-    }
+    };
 }
 
 type DroppableItemProps = {
@@ -57,7 +58,7 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
             drop: (item, monitor) => {
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {
-                    configuration.content = [...configuration.content || [], item]
+                    configuration.content = [...(configuration.content || []), item]
                     setConfigurationState(configuration)
                 }
             }

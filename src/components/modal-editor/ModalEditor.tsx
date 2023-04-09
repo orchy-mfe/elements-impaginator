@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import {Dialog} from 'primereact/dialog'
 import {FormattedMessage} from 'react-intl'
 import Editor from '@monaco-editor/react'

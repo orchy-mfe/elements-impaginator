@@ -1,4 +1,4 @@
-import React from 'react'
+import { StrictMode } from 'react';
 import {DndProvider} from 'react-dnd'
 import {HTML5Backend} from 'react-dnd-html5-backend'
 import ReactDOM from 'react-dom'
@@ -11,12 +11,12 @@ import messages from './intl'
 const navigatorLanguage = navigator.language.substring(0, 2)
 
 ReactDOM.render(
-    <React.StrictMode>
+    <StrictMode>
         <IntlProvider locale={navigatorLanguage} messages={messages[navigatorLanguage] || messages['en']}>
             <DndProvider backend={HTML5Backend}>
                 <App/>
             </DndProvider>
         </IntlProvider>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root')
 )

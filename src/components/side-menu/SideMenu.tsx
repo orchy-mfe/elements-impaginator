@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react';
 import {Sidebar} from 'primereact/sidebar'
 
 import {CatalogueItem} from '../catalogue-item/CatalogueItem'

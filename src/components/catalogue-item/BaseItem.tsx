@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import {DragSourceMonitor, useDrag} from 'react-dnd'
 
 const rowStyle = 'display: flex; flex-direction: column;'
