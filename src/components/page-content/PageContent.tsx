@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {useDrop} from "react-dnd";
-import ReactDOM from "react-dom";
+import { useCallback, useEffect, useState } from 'react';
+import {useDrop} from 'react-dnd'
+import ReactDOM from 'react-dom'
 
-import {Configuration} from "../../models/Configuration";
-import {DroppableItem} from "../droppable-item/DroppableItem";
-import {observableConfiguration} from "../../stores/configuration";
+import {Configuration} from '../../models/Configuration'
+import {DroppableItem} from '../droppable-item/DroppableItem'
+import {observableConfiguration} from '../../stores/configuration'
 
 import Style from './PageContent.module.css'
 
@@ -59,7 +59,7 @@ export const PageContent = () => {
     const background = {background: !configuration && isOver ? 'yellow' : 'white'}
 
     return (
-        <div ref={onRefChange} className={Style.pageContent} style={background}>
+        <div className={Style.pageContent} ref={onRefChange} style={background}>
             {configuration && <DroppableItem configuration={configuration} deleteItem={deleteItem}/>}
         </div>
     )

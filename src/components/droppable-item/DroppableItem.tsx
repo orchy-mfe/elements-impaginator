@@ -1,18 +1,19 @@
-import React, {MouseEvent, RefObject, useCallback, useRef, useState} from "react";
-import {useDrop} from "react-dnd";
-import ReactDOM from "react-dom";
-import {ContextMenu} from "primereact/contextmenu";
+import { MouseEvent, RefObject, useCallback, useRef, useState } from 'react';
+import * as React from 'react';
+import {useDrop} from 'react-dnd'
+import ReactDOM from 'react-dom'
+import {ContextMenu} from 'primereact/contextmenu'
 
-import {Configuration} from "../../models/Configuration";
-import {styleConverter} from "../../lib/CssToJs";
-import {buildMenuItems} from "../../models/ItemContextMenu";
-import {baseStyle} from "../catalogue-item/BaseItem";
-import {ModalEditor} from "../modal-editor/ModalEditor";
-import { useModal } from "../../hooks/useModal";
+import {Configuration} from '../../models/Configuration'
+import {styleConverter} from '../../lib/CssToJs'
+import {buildMenuItems} from '../../models/ItemContextMenu'
+import {baseStyle} from '../catalogue-item/BaseItem'
+import {ModalEditor} from '../modal-editor/ModalEditor'
+import {useModal} from '../../hooks/useModal'
 
 const shouldInsertPaddingBottom = (configuration: Configuration) => {
-    const showForRow = configuration.type === "row"
-    const showForColumn = configuration.type === "column" && (configuration.content?.length || -1) <= 0
+    const showForRow = configuration.type === 'row'
+    const showForColumn = configuration.type === 'column' && (configuration.content?.length || -1) <= 0
     return showForRow || showForColumn
 }
 
@@ -23,12 +24,12 @@ const createStyle = (configuration: Configuration, isOver: boolean) => {
     return {
         style: {
             ...initialStyle,
-            ...configuration.tag ? undefined : {border: '1px dotted'},
-            ...shouldInsertPaddingBottom(configuration) ? {paddingBottom: '20px'} : undefined,
-            ...isOver && !configuration.tag ? {background: 'yellow'} : undefined,
+            ...(configuration.tag ? undefined : {border: '1px dotted'}),
+            ...(shouldInsertPaddingBottom(configuration) ? {paddingBottom: '20px'} : undefined),
+            ...(isOver && !configuration.tag ? {background: 'yellow'} : undefined),
             ...convertedStyle
         }
-    }
+    };
 }
 
 type DroppableItemProps = {
@@ -57,7 +58,7 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
             drop: (item, monitor) => {
                 const droppedOnMe = !monitor.didDrop()
                 if (droppedOnMe) {
-                    configuration.content = [...configuration.content || [], item]
+                    configuration.content = [...(configuration.content || []), item]
                     setConfigurationState(configuration)
                 }
             }
@@ -105,11 +106,11 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
             <ContextMenu model={buildMenuItems({deleteItem, showDialog})} ref={contextMenuRef}/>,
             <ModalEditor
                 configuration={JSON.stringify({...configuration, content: undefined}, null, 2)}
+                footerButton='configuration.update'
+                header={`${configuration.tag || configuration.type}`}
                 isVisible={dialogVisible}
                 onHide={hideDialog}
                 onSave={updateConfig}
-                header={`${configuration.tag || configuration.type}`}
-                footerButton='configuration.update'
             />
         ].concat(droppableChildren)
     )

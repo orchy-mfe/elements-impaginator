@@ -1,12 +1,13 @@
-import React, {ChangeEvent, useCallback, useState} from "react";
+import { ChangeEvent, useCallback, useState } from 'react';
+import * as React from 'react';
 
-import {Dialog} from "primereact/dialog";
-import {registerCustomElement} from "../../stores/custom-elements-catalogue";
-import {FormattedMessage} from "react-intl";
-import {Button} from "primereact/button";
-import {InputText} from "primereact/inputtext";
+import {Dialog} from 'primereact/dialog'
+import {registerCustomElement} from '../../stores/custom-elements-catalogue'
+import {FormattedMessage} from 'react-intl'
+import {Button} from 'primereact/button'
+import {InputText} from 'primereact/inputtext'
 
-import { useModal } from "../../hooks/useModal";
+import {useModal} from '../../hooks/useModal'
 
 import Style from './CatalogueRegister.module.css'
 
@@ -27,11 +28,11 @@ export const CatalogueRegister: React.FC = () => {
     return (
         <>
             <span className={plusIcon} onClick={showDialog}/>
-            <Dialog footer={<CatalogueRegisterFooter registerCatalogue={registerCatalogue}/>}
+            <Dialog className={Style.dialogContainer}
+                    footer={<CatalogueRegisterFooter registerCatalogue={registerCatalogue}/>}
                     header={<FormattedMessage id='catalogueRegistration'/>}
-                    visible={dialogVisible}
                     onHide={hideDialog}
-                    className={Style.dialogContainer}
+                    visible={dialogVisible}
             >
                 <div className={Style.dialogContent}>
                     <FormattedMessage id='catalogueRegistration.modal'/>
