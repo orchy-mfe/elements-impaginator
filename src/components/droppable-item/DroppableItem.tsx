@@ -1,18 +1,18 @@
-import React, {MouseEvent, RefObject, useCallback, useRef, useState} from "react";
-import {useDrop} from "react-dnd";
-import ReactDOM from "react-dom";
-import {ContextMenu} from "primereact/contextmenu";
+import React, {MouseEvent, RefObject, useCallback, useRef, useState} from 'react'
+import {useDrop} from 'react-dnd'
+import ReactDOM from 'react-dom'
+import {ContextMenu} from 'primereact/contextmenu'
 
-import {Configuration} from "../../models/Configuration";
-import {styleConverter} from "../../lib/CssToJs";
-import {buildMenuItems} from "../../models/ItemContextMenu";
-import {baseStyle} from "../catalogue-item/BaseItem";
-import {ModalEditor} from "../modal-editor/ModalEditor";
-import { useModal } from "../../hooks/useModal";
+import {Configuration} from '../../models/Configuration'
+import {styleConverter} from '../../lib/CssToJs'
+import {buildMenuItems} from '../../models/ItemContextMenu'
+import {baseStyle} from '../catalogue-item/BaseItem'
+import {ModalEditor} from '../modal-editor/ModalEditor'
+import {useModal} from '../../hooks/useModal'
 
 const shouldInsertPaddingBottom = (configuration: Configuration) => {
-    const showForRow = configuration.type === "row"
-    const showForColumn = configuration.type === "column" && (configuration.content?.length || -1) <= 0
+    const showForRow = configuration.type === 'row'
+    const showForColumn = configuration.type === 'column' && (configuration.content?.length || -1) <= 0
     return showForRow || showForColumn
 }
 
@@ -105,11 +105,11 @@ export const DroppableItem: React.FC<DroppableItemProps> = ({configuration, dele
             <ContextMenu model={buildMenuItems({deleteItem, showDialog})} ref={contextMenuRef}/>,
             <ModalEditor
                 configuration={JSON.stringify({...configuration, content: undefined}, null, 2)}
+                footerButton='configuration.update'
+                header={`${configuration.tag || configuration.type}`}
                 isVisible={dialogVisible}
                 onHide={hideDialog}
                 onSave={updateConfig}
-                header={`${configuration.tag || configuration.type}`}
-                footerButton='configuration.update'
             />
         ].concat(droppableChildren)
     )

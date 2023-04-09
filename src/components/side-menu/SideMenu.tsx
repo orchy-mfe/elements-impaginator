@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {Sidebar} from "primereact/sidebar";
+import React, {useEffect, useState} from 'react'
+import {Sidebar} from 'primereact/sidebar'
 
-import {CatalogueItem} from "../catalogue-item/CatalogueItem";
-import {BaseItem} from "../catalogue-item/BaseItem";
-import {observableCatalogue} from "../../stores/custom-elements-catalogue";
-import {CatalogueRegister} from "../catalogue-register/CatalogueRegister";
-import {ConfigurationManager} from "../configuration-manager/ConfigurationManager";
+import {CatalogueItem} from '../catalogue-item/CatalogueItem'
+import {BaseItem} from '../catalogue-item/BaseItem'
+import {observableCatalogue} from '../../stores/custom-elements-catalogue'
+import {CatalogueRegister} from '../catalogue-register/CatalogueRegister'
+import {ConfigurationManager} from '../configuration-manager/ConfigurationManager'
 
 import './SideMenu.css'
 
@@ -21,10 +21,10 @@ export const SideMenu = () => {
     }, [])
 
     return (
-        <Sidebar visible onHide={noOp} icons={generateIcons} showCloseIcon={false}>
+        <Sidebar icons={generateIcons} onHide={noOp} showCloseIcon={false} visible>
             <b>{'Items catalogue'}</b>
-            <BaseItem kind={"row"}/>
-            <BaseItem kind={"column"}/>
+            <BaseItem kind={'row'}/>
+            <BaseItem kind={'column'}/>
             {
                 currentCatalogue.map(item => <CatalogueItem itemName={item}/>)
             }

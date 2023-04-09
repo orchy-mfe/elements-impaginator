@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {DragSourceMonitor, useDrag} from "react-dnd";
+import React, {useEffect, useState} from 'react'
+import {DragSourceMonitor, useDrag} from 'react-dnd'
 
 const rowStyle = 'display: flex; flex-direction: column;'
 const columnStyle = 'display: flex; flex-direction: row;'
@@ -13,7 +13,7 @@ const opacityManager = (monitor: DragSourceMonitor) => ({
     opacity: monitor.isDragging() ? 0.5 : 1
 })
 
-const createConfiguration = (kind: "row" | "column") => ({
+const createConfiguration = (kind: 'row' | 'column') => ({
     type: kind,
     attributes: {
         style: kind === 'row' ? rowStyle : columnStyle

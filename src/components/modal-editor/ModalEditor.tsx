@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {Dialog} from "primereact/dialog";
-import {FormattedMessage} from "react-intl";
-import Editor from "@monaco-editor/react";
-import {Button} from "primereact/button";
+import React, {useEffect, useState} from 'react'
+import {Dialog} from 'primereact/dialog'
+import {FormattedMessage} from 'react-intl'
+import Editor from '@monaco-editor/react'
+import {Button} from 'primereact/button'
 
-import Style from "../catalogue-register/CatalogueRegister.module.css";
-import {Configuration} from "../../models/Configuration";
+import Style from '../catalogue-register/CatalogueRegister.module.css'
+import {Configuration} from '../../models/Configuration'
 
 type ModalEditorProps = {
     configuration: any,
@@ -27,15 +27,15 @@ export const ModalEditor: React.FC<ModalEditorProps> = (props) => {
     const footer = <ModalEditorFooter configuration={currentConfiguration} footerButton={footerButton} onSave={onSave}/>
 
     return (
-        <Dialog footer={footer}
+        <Dialog className={Style.dialogContainer}
+                footer={footer}
                 header={<FormattedMessage id={header}/>}
-                visible={isVisible}
                 onHide={onHide}
-                className={Style.dialogContainer}
+                visible={isVisible}
         >
             <div className={Style.dialogContent}>
-                <Editor height='70vh' language='json' value={currentConfiguration}
-                        onChange={setCurrentConfiguration}/>
+                <Editor height='70vh' language='json' onChange={setCurrentConfiguration}
+                        value={currentConfiguration}/>
             </div>
         </Dialog>
     )
