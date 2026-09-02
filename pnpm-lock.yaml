@@ -15,8 +15,8 @@ dependencies:
     specifier: ^6.0.1
     version: 6.0.1
   primereact:
-    specifier: ^9.2.2
-    version: 9.2.2(@types/react@18.0.33)(primeicons@6.0.1)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^11.1.0
+    version: 11.1.0(react-dom@18.2.0)(react@18.2.0)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1903,6 +1903,83 @@ packages:
       fastq: 1.15.0
     dev: true
 
+  /@primereact/core@11.1.0(react@18.2.0):
+    resolution: {integrity: sha512-Z2J2DV22ml5UnlzO3gd4wCGBqN0GeNfzgrozF6RqNs2Udu7H6pZQepn1gWjBqt1APKwT9vSIvl8UDgORuAa08A==}
+    peerDependencies:
+      react: '>=19.0.0'
+    dependencies:
+      '@primereact/hooks': 11.1.0(react@18.2.0)
+      '@primereact/types': 11.1.0(@primeuix/motion@1.0.0)(@primeuix/styled@1.0.0)
+      '@primeui/license-manager': 1.1.0
+      '@primeuix/locale': 0.1.0
+      '@primeuix/motion': 1.0.0
+      '@primeuix/styled': 1.0.0
+      '@primeuix/utils': 0.8.1
+      react: 18.2.0
+    dev: false
+
+  /@primereact/headless@11.1.0(react@18.2.0):
+    resolution: {integrity: sha512-ugegpnog1+MXJWuv/kAjICP2IyNeyaWdb+kIf8ISGpRX/GTAKtM7Rn9UyVOOo+/68YjhAFPFtqL7DRrE5fRiLg==}
+    dependencies:
+      '@primereact/core': 11.1.0(react@18.2.0)
+      '@primereact/hooks': 11.1.0(react@18.2.0)
+      '@primeui/license-manager': 1.1.0
+      '@primeuix/styled': 1.0.0
+      '@primeuix/utils': 0.8.1
+    transitivePeerDependencies:
+      - react
+    dev: false
+
+  /@primereact/hooks@11.1.0(react@18.2.0):
+    resolution: {integrity: sha512-+VOuOFuv56IhjD08e/zkNHmJf0apwxW7LMQxji7YK2DnqhcwW02mq0I/Tgn4VvscGlMO9v+Hhtf14Bq0Zw8oIA==}
+    peerDependencies:
+      react: '>=19.0.0'
+    dependencies:
+      '@primeuix/utils': 0.8.1
+      react: 18.2.0
+    dev: false
+
+  /@primereact/types@11.1.0(@primeuix/motion@1.0.0)(@primeuix/styled@1.0.0):
+    resolution: {integrity: sha512-N//v6G15SajKJSmqIsQALNPlsQ6AP4A6Uxrfwopnf2hNX3l2vdfGnRDznvG8xF1+NluRljnNtAx47lV+SMPhJQ==}
+    peerDependencies:
+      '@primeuix/motion': ^1.0.0
+      '@primeuix/styled': ^1.0.0
+    dependencies:
+      '@primeuix/motion': 1.0.0
+      '@primeuix/styled': 1.0.0
+    dev: false
+
+  /@primeui/license-manager@1.1.0:
+    resolution: {integrity: sha512-irjhOGs6Xjwh1JhMyXtdUsYCsve6kBySZzDUhS/mWxsjwQm/wSN7oulyP/f5huJKdhZSzaN6rVApwpp4nDWE1g==}
+    dev: false
+
+  /@primeuix/locale@0.1.0:
+    resolution: {integrity: sha512-/qLGiwQ/YN83GPSygKEI3cwgZ+rb0R0rNNtQrOGGaHIaG3zpkGS3QbK/qtDUi0leC69jJgY39GDX+gCeUXPKdg==}
+    engines: {node: '>=12.11.0'}
+    dependencies:
+      '@primeuix/utils': 0.8.1
+    dev: false
+
+  /@primeuix/motion@1.0.0:
+    resolution: {integrity: sha512-rqpFRKmUVp9BI3YQKdok0rLUwzYShXzuuxy72Kq74xYRV14eR+4+XrIXOdyVs7j7CYV0ajYowiRpJCrVgdrq6A==}
+    engines: {node: '>=12.11.0'}
+    dependencies:
+      '@primeuix/utils': 0.8.1
+    dev: false
+
+  /@primeuix/styled@1.0.0:
+    resolution: {integrity: sha512-6SXoeQWwKswSqTv1ygaXNfY7otHo6Rb9mxbKJK5WF8adWlZ6CtwmlNfIP+p8cH/zGccsei/5Bu7IetXlMoZGjQ==}
+    engines: {node: '>=12.11.0'}
+    dependencies:
+      '@primeui/license-manager': 1.1.0
+      '@primeuix/utils': 0.8.1
+    dev: false
+
+  /@primeuix/utils@0.8.1:
+    resolution: {integrity: sha512-tMtdkSUEl8/6Lc5iNOp7zXMFKJGLyf7mxvS/Hf5GzHVfa2dvsnVmEn0I/i3+80oEmnsVlHhr9+8aM5cKw7vbHA==}
+    engines: {node: '>=12.11.0'}
+    dev: false
+
   /@react-dnd/asap@5.0.2:
     resolution: {integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==}
     dev: false
@@ -2044,12 +2121,6 @@ packages:
     dependencies:
       '@types/react': 18.0.33
     dev: true
-
-  /@types/react-transition-group@4.4.5:
-    resolution: {integrity: sha512-juKD/eiSM3/xZYzjuzH6ZwpP+/lejltmiS3QEzV/vmb/Q8+HfDmxu+Baga8UEMGBqV88Nbg4l2hY/K2DkyaLLA==}
-    dependencies:
-      '@types/react': 18.0.33
-    dev: false
 
   /@types/react@18.0.33:
     resolution: {integrity: sha512-sHxzVxeanvQyQ1lr8NSHaj0kDzcNiGpILEVt69g9S31/7PfMvNCKLKcsHw4lYKjs3cGNJjXSP4mYzX43QlnjNA==}
@@ -4105,23 +4176,16 @@ packages:
     resolution: {integrity: sha512-KDeO94CbWI4pKsPnYpA1FPjo79EsY9I+M8ywoPBSf9XMXoe/0crjbUK7jcQEDHuc0ZMRIZsxH3TYLv4TUtHmAA==}
     dev: false
 
-  /primereact@9.2.2(@types/react@18.0.33)(primeicons@6.0.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-GGkxLHOdQot5DYW9Z7vTPPaDwzjvnderzLWAXda220teNScAJNtXCIqR3QESi4c9OaNbGD4IlBlhXr++z8fjsw==}
+  /primereact@11.1.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-0/q9fAkF2ULM+2XImBbPpcOTfYatGpqzpCXm9N26fmA2EZxKQyKbQXfJC1mx0dozoFnvllyCwvSYSk59fhIwLw==}
     peerDependencies:
-      '@types/react': ^17.0.0 || ^18.0.0
-      primeicons: ^5.0.0 || ^6.0.0
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
+      react: '>=19.0.0'
+      react-dom: '>=19.0.0'
     dependencies:
-      '@types/react': 18.0.33
-      '@types/react-transition-group': 4.4.5
-      primeicons: 6.0.1
+      '@primereact/core': 11.1.0(react@18.2.0)
+      '@primereact/headless': 11.1.0(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /prop-types@15.8.1:
